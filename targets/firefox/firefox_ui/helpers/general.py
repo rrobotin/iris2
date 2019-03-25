@@ -4,12 +4,10 @@ from src.core.api.errors import APIHelperError
 from src.core.api.finder.finder import wait, exists
 from src.core.api.finder.pattern import Pattern
 from src.core.api.keyboard.key import Key
-from src.core.api.keyboard.keyboard_api import paste
+from src.core.api.keyboard.keyboard_util import paste
 from src.core.api.keyboard.keyboard_api import type
 from targets.firefox.firefox_ui.helpers.keyboard_shortcuts import select_location_bar
 from targets.firefox.firefox_ui.nav_bar import NavBar
-
-
 
 INVALID_GENERIC_INPUT = 'Invalid input'
 INVALID_NUMERIC_INPUT = 'Expected numeric value'
@@ -27,6 +25,8 @@ def confirm_firefox_launch(image=None):
         wait(image, 60)
     except Exception:
         raise APIHelperError('Can\'t launch Firefox - aborting test run.')
+
+
 def repeat_key_down(num):
     """Repeat DOWN keystroke a given number of times.
 

@@ -89,6 +89,10 @@ def parse_args():
     parser.add_argument('-z', '--resize',
                         help='Convert hi-res images to normal',
                         action='store_true')
+    parser.add_argument('-vk', '--virtual_keyboard',
+                        help='Use the virtual/fake keyboard for virtual environments',
+                        action='store_true',
+                        default=False)
     if iris_args is None:
         iris_args = parser.parse_args()
 

@@ -9,7 +9,11 @@ import time
 from src.core.api.errors import APIHelperError, FindError
 from src.core.api.finder.pattern import Pattern
 from src.core.api.keyboard.key import KeyModifier, Key
-from src.core.api.keyboard.keyboard_api import key_down, key_up, type
+from src.core.util.arg_parser import parse_args
+if parse_args().virtual_keyboard:
+    from src.core.api.keyboard.Xkeyboard import type, Virtual_Keyboard
+else:
+    from src.core.api.keyboard.keyboard_api import key_down, key_up, type
 from src.core.api.location import Location
 from src.core.api.os_helpers import OSHelper
 from src.core.api.screen.region import click, drag_drop, find, wait, wait_vanish
@@ -415,9 +419,14 @@ def maximize_window():
 
         # Alt key changes maximize button from full screen to maximize window.
         maximize_button = window_controls_pattern.target_offset(width / 2 - 3, 0)
-        key_down(Key.ALT)
-        click(maximize_button)
-        key_up(Key.ALT)
+        if parse_args().virtual_keyboard:
+            Virtual_Keyboard.key_down(Key.ALT)
+            click(maximize_button)
+            Virtual_Keyboard.key_up(Key.ALT)
+        else:
+            key_down(Key.ALT)
+            click(maximize_button)
+            key_up(Key.ALT)
 
     elif OSHelper.is_windows():
         type(text=Key.UP, modifier=KeyModifier.WIN)
@@ -659,5 +668,6 @@ def open_browser_console():
         type(text="j", modifier=[KeyModifier.CMD, KeyModifier.SHIFT])
     else:
         type(text="j", modifier=[KeyModifier.CTRL, KeyModifier.SHIFT])
+
 
 # End Tools keyboard shortcuts

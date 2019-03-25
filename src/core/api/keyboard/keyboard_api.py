@@ -9,10 +9,8 @@ import subprocess
 import time
 
 import pyautogui
-import pyperclip
-
-from src.core.api.errors import FindError
-from src.core.api.keyboard.key import KeyModifier, Key
+from src.core.api.keyboard.key import Key
+from src.core.api.keyboard.keyboard_util import get_active_modifiers
 from src.core.api.os_helpers import OSHelper
 from src.core.api.settings import Settings
 from src.core.util.arg_parser import logger
@@ -110,68 +108,6 @@ def type(text: Key or str = None, modifier=None, interval: int = None):
 
     if Settings.type_delay != Settings.DEFAULT_TYPE_DELAY:
         Settings.type_delay = Settings.DEFAULT_TYPE_DELAY
-
-
-def paste(text: str):
-    """
-    :param text: Text to be pasted.
-    :return: None.
-    """
-
-    pyperclip.copy(text)
-
-    text_copied = False
-    wait_scan_rate = float(Settings.wait_scan_rate)
-    interval = 1 / wait_scan_rate
-    max_attempts = int(Settings.auto_wait_timeout * wait_scan_rate)
-    attempt = 0
-
-    while not text_copied and attempt < max_attempts:
-        if pyperclip.paste() == text:
-            text_copied = True
-        else:
-            time.sleep(interval)
-            attempt += 1
-
-    if not text_copied:
-        raise FindError('Paste method failed.')
-
-    if OSHelper.is_mac():
-        type(text='v', modifier=KeyModifier.CMD)
-    else:
-        type(text='v', modifier=KeyModifier.CTRL)
-
-    pyperclip.copy('')
-
-
-def get_active_modifiers(key):
-    """Gets all the active modifiers depending on the used OS.
-
-    :param key: Key modifier.
-    :return: Returns an array with all the active modifiers.
-    """
-    all_modifiers = [
-        Key.SHIFT,
-        Key.CTRL]
-    if OSHelper.is_mac():
-        all_modifiers.append(Key.CMD)
-    elif OSHelper.is_windows():
-        all_modifiers.append(Key.WIN)
-    else:
-        all_modifiers.append(Key.META)
-
-    all_modifiers.append(Key.ALT)
-
-    active_modifiers = []
-    for item in all_modifiers:
-        try:
-            for key_value in key:
-                if item == key_value.value:
-                    active_modifiers.append(item)
-        except TypeError:
-            if item == key.value:
-                active_modifiers.append(item)
-    return active_modifiers
 
 
 def is_lock_on(key):
