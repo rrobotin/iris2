@@ -19,7 +19,6 @@ phases:
       - sudo chmod +x bootstrap.sh
       - sudo chmod +x linux_bootstrap.sh
       - sudo ./bootstrap.sh
-      - pip install pip==9.0.3
       - pip install pipenv
       - sudo pipenv install
       - echo FINISH INSTALL!!!!
