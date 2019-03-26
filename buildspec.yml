@@ -1,0 +1,45 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - echo Build started on `date`
+      - pwd
+      - ls -all
+      - sudo apt-get update -y
+      - sudo apt install -y xvfb
+      - sudo apt install -y dbus-x11
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - echo Build started on `date`
+      - cd bootstrap/
+      - ls -all
+      - sudo chmod +x bootstrap.sh
+      - sudo chmod +x linux_bootstrap.sh
+      - sudo ./bootstrap.sh
+      - pip install pip==9.0.3
+      - pip install pipenv
+      - sudo pipenv install
+      - echo FINISH INSTALL!!!!
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      - pwd
+      - cd ../
+      - pwd
+      - ls -all
+      - export DISPLAY=:99.0
+      - Xvfb :99 -screen 0 1920x1080x24+32 +extension GLX +extension RANDR > /dev/null 2>&1 &
+      - sleep 3
+      - echo Start CI tests
+      - sudo pipenv run iris -j -n -t clear_all_history -i DEBUG
+      - echo FINISH RUNNING TESTS
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - cd ~/.iris
+      - ls -all
+      - echo Build completed on `date`
