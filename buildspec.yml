@@ -7,6 +7,7 @@ phases:
       - echo Build started on `date`
       - pwd
       - ls -all
+      - whoami
       - python --version
       - sudo apt-get update -y
       - sudo apt install -y xvfb
