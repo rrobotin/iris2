@@ -10,10 +10,12 @@ echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 echo -e "${GREEN}  --->  sudo apt-get update #####${NC} \n"
 sudo apt-get update
 
-
 echo -e "\n${GREEN}  --->  installing/updating Python 3 #####${NC}\n"
 if command -v python3 &>/dev/null; then
-    echo -e "\n${GREEN} --->  Skipping Python 3 install. Already installed. ${NC}\n"
+    echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
+    python --version
+    sudo apt-get -y install python3.5
+    python --version
 else
     sudo apt-get -y install python3
 fi
