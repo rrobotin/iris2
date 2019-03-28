@@ -9,7 +9,7 @@ phases:
       - ls -all
       - whoami
       - python --version
-      - useradd ubuntu
+      - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
       - echo ubuntu:U6aMy0wojraho | chpasswd -e
       - usermod -aG sudo ubuntu
       - cd /home/
