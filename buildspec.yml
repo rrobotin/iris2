@@ -12,7 +12,8 @@ phases:
       - useradd ubuntu
       - echo ubuntu:U6aMy0wojraho | chpasswd -e
       - usermod -aG sudo ubuntu
-      - ll /home/
+      - cd /home/
+      - ls -all
       - su - ubuntu
       - whoami
       - pwd
