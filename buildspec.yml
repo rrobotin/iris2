@@ -17,6 +17,7 @@ phases:
       - ls -all
       - su - ubuntu
       - whoami
+      - strace su ubuntu
       - pwd
       - sudo apt-get update -y
       - sudo apt install -y xvfb
