@@ -12,7 +12,7 @@ phases:
       - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
       - grep ubuntu /etc/passwd
       - echo ubuntu:U6aMy0wojraho | chpasswd -e
-      - grep ubuntu /etc/passwd
+      - grep ubuntu /etc/shadow
       - cd /home/
       - ls -all
       - su - ubuntu
