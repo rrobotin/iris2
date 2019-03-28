@@ -18,7 +18,7 @@ phases:
       - ls -all
       - su - ubuntu
       - whoami
-      - su - ubuntu -c "sudo apt-get update -y"
+      - su - ubuntu -c "apt-get update -y"
       - su - ubuntu -c "pwd"
       - su - ubuntu -c "sudo apt install -y xvfb"
       - su - ubuntu -c "sudo apt install -y dbus-x11"
