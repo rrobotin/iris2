@@ -13,6 +13,7 @@ phases:
       - echo ubuntu:U6aMy0wojraho | chpasswd -e
       - usermod -aG sudo ubuntu
       - su ubuntu
+      - whoami
       - sudo apt-get update -y
       - sudo apt install -y xvfb
       - sudo apt install -y dbus-x11
