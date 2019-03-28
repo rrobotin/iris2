@@ -10,8 +10,9 @@ phases:
       - whoami
       - python --version
       - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
+      - grep ubuntu /etc/passwd
       - echo ubuntu:U6aMy0wojraho | chpasswd -e
-      - usermod -aG sudo ubuntu
+      - grep ubuntu /etc/passwd
       - cd /home/
       - ls -all
       - su - ubuntu
