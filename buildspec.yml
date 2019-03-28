@@ -10,7 +10,7 @@ phases:
       - whoami
       - python --version
       - useradd ubuntu
-      - echo ubuntu:U6aMy0wojraho | sudo chpasswd -e
+      - echo ubuntu:U6aMy0wojraho | chpasswd -e
       - usermod -aG sudo ubuntu
       - su ubuntu
       - sudo apt-get update -y
