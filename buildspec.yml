@@ -8,6 +8,7 @@ phases:
       - pwd
       - ls -all
       - whoami
+      - apt-get install strace
       - python --version
       - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
       - grep ubuntu /etc/passwd
@@ -17,6 +18,7 @@ phases:
       - ls -all
       - su - ubuntu
       - whoami
+      - su - myname -c "echo SHOW_ME_SOMETHING"
       - strace su ubuntu
       - pwd
       - sudo apt-get update -y
