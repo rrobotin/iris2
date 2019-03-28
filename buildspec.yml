@@ -9,20 +9,24 @@ phases:
       - ls -all
       - whoami
       - python --version
-      - apt-get update -y
-      - apt install -y xvfb
-      - apt install -y dbus-x11
+      - useradd ubuntu
+      - echo ubuntu:U6aMy0wojraho | sudo chpasswd -e
+      - usermod -aG sudo ubuntu
+      - su ubuntu
+      - sudo apt-get update -y
+      - sudo apt install -y xvfb
+      - sudo apt install -y dbus-x11
   pre_build:
     commands:
       - echo Entered the pre_build phase...
       - echo Build started on `date`
       - cd bootstrap/
       - ls -all
-      - chmod +x bootstrap.sh
-      - chmod +x linux_bootstrap.sh
-      - ./bootstrap.sh
+      - sudo chmod +x bootstrap.sh
+      - sudo chmod +x linux_bootstrap.sh
+      - sudo ./bootstrap.sh
       - pip install pipenv
-      - pipenv install
+      - sudo pipenv install
       - echo FINISH INSTALL!!!!
   build:
     commands:
@@ -36,7 +40,7 @@ phases:
       - Xvfb :99 -screen 0 1920x1080x24+32 +extension GLX +extension RANDR > /dev/null 2>&1 &
       - sleep 3
       - echo Start CI tests
-      - pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG
+      - sudo pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG
       - echo FINISH RUNNING TESTS
   post_build:
     commands:
