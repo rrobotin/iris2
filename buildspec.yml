@@ -9,6 +9,9 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
+      - apt-get install libssl-dev openssl
+      - apt-get update
+      - apt-get install python3.5
       - python --version
       - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
       - grep ubuntu /etc/passwd
