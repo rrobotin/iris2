@@ -18,7 +18,7 @@ phases:
       - ls -all
       - su - ubuntu
       - whoami
-      - su - myname -c "echo SHOW_ME_SOMETHING"
+      - su - ubuntu -c "echo SHOW_ME_SOMETHING"
       - strace su ubuntu
       - pwd
       - sudo apt-get update -y
