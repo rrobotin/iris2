@@ -7,8 +7,8 @@ phases:
       - echo Build started on `date`
       - pwd
       - ls -all
+      - cat /etc/os-release
       - whoami
-      - apt-get install strace
       - python --version
       - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
       - grep ubuntu /etc/passwd
