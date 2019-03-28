@@ -9,7 +9,7 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
-      - apt-get install libssl-dev openssl
+      - add-apt-repository ppa:deadsnakes/ppa
       - apt-get update
       - apt-get install python3.5
       - python --version
