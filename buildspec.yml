@@ -12,7 +12,14 @@ phases:
       - python --version
       - sudo apt-get update -y
       - sudo apt install -y xvfb
-- sudo apt install -y dbus-x11
+      - sudo apt install -y dbus-x11
+      - sudo add-apt-repository ppa:deadsnakes/ppa
+      - wget https://www.python.org/ftp/python/3.5.7/Python-3.5.7.tgz
+      - tar xzvf Python-3.5.0.tgz
+      - cd Python-3.5.0
+      - ./configure
+      - make
+      - sudo make install
   pre_build:
     commands:
       - echo Entered the pre_build phase...
