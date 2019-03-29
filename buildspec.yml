@@ -30,6 +30,9 @@ phases:
     commands:
       - echo Entered the pre_build phase...
       - echo Build started on `date`
+      - sudo apt-get -y install python-pip
+      - python3.5 -m pip install --upgrade pip
+      - python3.5 -m pip install --upgrade pipenv
       - cd bootstrap/
       - ls -all
       - sudo chmod +x bootstrap.sh
