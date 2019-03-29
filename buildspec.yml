@@ -48,7 +48,7 @@ phases:
       - echo FINISH RUNNING TESTS
   post_build:
     commands:
-       - echo Entered the post_build phase...
+      - echo Entered the post_build phase...
       - cd ~/.iris
       - ls -all
       - echo Build completed on `date`
