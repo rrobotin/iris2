@@ -9,47 +9,39 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
-      - useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
-      - grep ubuntu /etc/passwd
-      - echo ubuntu:U6aMy0wojraho | chpasswd -e
-      - grep ubuntu /etc/shadow
-      - cd /home/
-      - ls -all
-      - su - ubuntu
-      - whoami
-      - su - ubuntu -c "apt-get update -y"
-      - su - ubuntu -c "pwd"
-      - su - ubuntu -c "sudo apt install -y xvfb"
-      - su - ubuntu -c "sudo apt install -y dbus-x11"
+      - python --version
+      - sudo apt-get update -y
+      - sudo apt install -y xvfb
+- sudo apt install -y dbus-x11
   pre_build:
     commands:
       - echo Entered the pre_build phase...
       - echo Build started on `date`
-      - su - ubuntu -c "cd bootstrap/"
-      - su - ubuntu -c "ls -all"
-      - su - ubuntu -c "sudo chmod +x bootstrap.sh"
-      - su - ubuntu -c "sudo chmod +x linux_bootstrap.sh"
-      - su - ubuntu -c "sudo ./bootstrap.sh"
-      - su - ubuntu -c "pip install pipenv"
-      - su - ubuntu -c "sudo pipenv install"
-      - su - ubuntu -c "echo FINISH INSTALL!!!!"
+      - cd bootstrap/
+      - ls -all
+      - sudo chmod +x bootstrap.sh
+      - sudo chmod +x linux_bootstrap.sh
+      - sudo ./bootstrap.sh
+      - pip install pipenv
+      - sudo pipenv install
+      - echo FINISH INSTALL!!!!
   build:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - su - ubuntu -c "pwd"
-      - su - ubuntu -c "cd ../"
-      - su - ubuntu -c "pwd"
-      - su - ubuntu -c "ls -all"
-      - su - ubuntu -c "export DISPLAY=:99.0"
-      - su - ubuntu -c "Xvfb :99 -screen 0 1920x1080x24+32 +extension GLX +extension RANDR > /dev/null 2>&1 &"
-      - su - ubuntu -c "sleep 3"
-      - su - ubuntu -c "echo Start CI tests"
-      - su - ubuntu -c "sudo pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG"
-      - su - ubuntu -c "echo FINISH RUNNING TESTS"
+      - pwd
+      - cd ../
+      - pwd
+      - ls -all
+      - export DISPLAY=:99.0
+      - Xvfb :99 -screen 0 1920x1080x24+32 +extension GLX +extension RANDR > /dev/null 2>&1 &
+      - sleep 3
+      - echo Start CI tests
+      - sudo pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG
+      - echo FINISH RUNNING TESTS
   post_build:
     commands:
-      - su - ubuntu -c "echo Entered the post_build phase..."
-      - su - ubuntu -c "cd ~/.iris"
-      - su - ubuntu -c "ls -all"
-      - su - ubuntu -c "echo Build completed on `date`"
+       - echo Entered the post_build phase...
+      - cd ~/.iris
+      - ls -all
+      - echo Build completed on `date`
