@@ -20,6 +20,8 @@ phases:
       - ./configure
       - make
       - sudo make install
+      - cd ../
+      - python --version
   pre_build:
     commands:
       - echo Entered the pre_build phase...
