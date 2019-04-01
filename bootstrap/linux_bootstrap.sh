@@ -10,17 +10,24 @@ echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 echo -e "${GREEN}  --->  sudo apt-get update #####${NC} \n"
 sudo apt-get update
 
-echo -e "\n${GREEN}  --->  installing/updating Python 3 #####${NC}\n"
+echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
 if command -v python3 &>/dev/null; then
     echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
     python --version
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
+    tar xzvf Python-3.5.0.tgz
+    cd Python-3.5.0
+    ./configure
+    make
+    sudo make install
 else
     sudo apt-get -y install python3
 fi
 
 echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
 if command -v pip &>/dev/null; then
-    pip install --upgrade pip
+    python3.5 -m pip install --upgrade pip
 else
     sudo apt-get -y install python-pip
 fi
@@ -83,9 +90,9 @@ sudo apt-get -y install python-tk
 
 echo -e "\n${GREEN}  --->  installing/upgrading pipenv #####${NC}\n"
 if command -v pipenv &>/dev/null; then
-    pip install --upgrade pipenv
+    python3.5 -m pip install --upgrade pipenv
 else
-    pip install pipenv
+    python3.5 -m pip install pipenv
 fi
 
 
