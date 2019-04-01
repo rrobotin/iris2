@@ -214,9 +214,9 @@ if  [ ! -f /usr/local/share/tessdata/afr.traineddata ]; then
 
     if [[ $(pwd | grep "tessdata-4.0.0") ]]; then
         if [ ! -d /usr/local/share/tessdata/ ]; then
-            sudo mkdir /usr/local/share/tessdata/
+            mkdir /usr/local/share/tessdata/
         fi
-        sudo mv * /usr/local/share/tessdata/
+        mv * /usr/local/share/tessdata/
     fi
 
 else
