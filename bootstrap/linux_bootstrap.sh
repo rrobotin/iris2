@@ -19,7 +19,7 @@ echo -e "${GREEN}  --->  unzip #####${NC} \n"
 apt-get -y install unzip
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
-which -a python
+echo which -a python
 if command -v python3 &>/dev/null; then
     echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
     python --version
@@ -32,8 +32,8 @@ if command -v python3 &>/dev/null; then
     make install
     cd ../
     python --version
-    which python
-    which python3
+    echo which python
+    echo which python3
 else
     add-apt-repository ppa:deadsnakes/ppa
     wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
@@ -44,8 +44,8 @@ else
     make install
     cd ../
     python --version
-    which python
-    which python3
+    echo which python
+    echo which python3
 fi
 
 echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
