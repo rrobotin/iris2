@@ -17,7 +17,7 @@ phases:
       - passwd -d ubuntu
       - groups ubuntu
       - exit
-      - su - ubuntu
+      - su ubuntu
       - whoami
       - pwd
       - BUILD_PATH=$(pwd)
