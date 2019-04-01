@@ -13,6 +13,10 @@ echo -e "${GREEN}  --->  software-properties-common #####${NC} \n"
 apt-get -y install software-properties-common
 echo -e "${GREEN}  --->  wget #####${NC} \n"
 apt-get -y install wget 
+echo -e "${GREEN}  --->  build-essential #####${NC} \n"
+apt-get -y install build-essential
+echo -e "${GREEN}  --->  unzip #####${NC} \n"
+apt-get -y install unzip
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
 if command -v python3 &>/dev/null; then
