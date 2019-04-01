@@ -9,12 +9,16 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
-      - useradd ubuntu -s /bin/bash -g sudo -m
-      - echo ubuntu:password | /usr/sbin/chpasswd
+      - useradd -p $(openssl passwd -1  ) ubuntu -s /bin/bash -aG sudo -m
+      - groups ubuntu
       - su - ubuntu
       - whoami
       - cd /home/
       - ls -all
+      - cat /etc/passwd | grep ubuntu
+      - cat /etc/shadow | grep ubuntu
+      - cat /etc/group | grep ubuntu
+      - cat /etc/gshadow | grep ubuntu
   pre_build:
     commands:
       - echo Entered the pre_build phase...
