@@ -9,37 +9,14 @@ echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 
 echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
 apt-get update
-echo -e "${GREEN}  --->  software-properties-common #####${NC} \n"
-apt-get -y install software-properties-common
-echo -e "${GREEN}  --->  wget #####${NC} \n"
-apt-get -y install wget 
-echo -e "${GREEN}  --->  build-essential #####${NC} \n"
-apt-get -y install build-essential
-echo -e "${GREEN}  --->  unzip #####${NC} \n"
-apt-get -y install unzip
-echo -e "${GREEN}  --->  libssl-dev #####${NC} \n"
-apt-get -y install libssl-dev
-echo -e "${GREEN}  --->  other libss-dev #####${NC} \n"
-apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
 
-echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
-echo which -a python
-if command -v python3 &>/dev/null; then
-    echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
-    python --version
-    add-apt-repository ppa:deadsnakes/ppa
-    wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
-    tar xzvf Python-3.5.0.tgz
-    cd Python-3.5.0
-    ./configure
-    make
-    make install
-    cd ../
-    python --version
-    echo which python
-    echo which python3
+echo -e "\n${GREEN}  --->  installing/updating Python 3.5 #####${NC}\n"
+python3 --version
+if [[ $(ptyhon3 --version | grep "Python 3.5") ]]; then
+    python3 --version
+    echo -e "\n${GREEN} --->  Skipping Python 3.5 install. Already installed. ${NC}\n"
 else
-    add-apt-repository ppa:deadsnakes/ppa
+    echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
     wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
     tar xzvf Python-3.5.0.tgz
     cd Python-3.5.0
@@ -47,9 +24,7 @@ else
     make
     make install
     cd ../
-    python --version
-    echo which python
-    echo which python3
+    python3 --version
 fi
 
 echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
