@@ -30,6 +30,8 @@ phases:
       - ls -all
       - cd $BUILD_PATH
       - pwd
+      - echo UPDATE
+      - apt-get update
       - echo software-properties-common
       - apt-get -y install software-properties-common
       - echo wget 
