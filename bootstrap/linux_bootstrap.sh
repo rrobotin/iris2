@@ -7,89 +7,100 @@ NC='\033[0m' # No Color
 
 echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 
-echo -e "${GREEN}  --->  sudo apt-get update #####${NC} \n"
-sudo apt-get update
+echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
+apt-get update
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
 if command -v python3 &>/dev/null; then
     echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
     python --version
-    sudo add-apt-repository ppa:deadsnakes/ppa
+    add-apt-repository ppa:deadsnakes/ppa
     wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
     tar xzvf Python-3.5.0.tgz
     cd Python-3.5.0
     ./configure
     make
-    sudo make install
+    make install
     cd ../
     python --version
-    sudo which python
-    sudo which python3
+    which python
+    which python3
 else
-    sudo apt-get -y install python3
+    python --version
+    add-apt-repository ppa:deadsnakes/ppa
+    wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
+    tar xzvf Python-3.5.0.tgz
+    cd Python-3.5.0
+    ./configure
+    make
+    make install
+    cd ../
+    python --version
+    which python
+    which python3
 fi
 
 echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
 if command -v pip &>/dev/null; then
     python3.5 -m pip install --upgrade pip
 else
-    sudo apt-get -y install python-pip
+    apt-get -y install python-pip
 fi
 
 # Installing library dependencies
 echo -e "\n${GREEN}  --->  installing/upgrading scrot #####${NC}\n"
-sudo apt-get -y install scrot
+apt-get -y install scrot
 
 echo -e "\n${GREEN}  --->  installing/upgrading xsel #####${NC}\n"
-sudo apt-get -y install xsel
+apt-get -y install xsel
 
 echo -e "\n${GREEN}  --->  installing/upgrading p7zip-full #####${NC}\n"
-sudo apt-get -y install p7zip-full
+apt-get -y install p7zip-full
 
 echo -e "\n${GREEN}  --->  installing/upgrading libopencv-dev #####${NC}\n"
-sudo apt-get -y install libopencv-dev
+apt-get -y install libopencv-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading autoconf automake libtool #####${NC}\n"
-sudo apt-get -y install autoconf automake libtool
+apt-get -y install autoconf automake libtool
 
 echo -e "\n${GREEN}  --->  installing/upgrading autoconf-archive #####${NC}\n"
-sudo apt-get -y install autoconf-archive
+apt-get -y install autoconf-archive
 
 echo -e "\n${GREEN}  --->  installing/upgrading pkg-config #####${NC}\n"
-sudo apt-get -y install pkg-config
+apt-get -y install pkg-config
 
 echo -e "\n${GREEN}  --->  installing/upgrading libpng-dev #####${NC}\n"
-sudo apt-get -y install libpng-dev
+apt-get -y install libpng-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libjpeg8-dev #####${NC}\n"
-sudo apt-get -y install libjpeg8-dev
+apt-get -y install libjpeg8-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libtiff5-dev #####${NC}\n"
-sudo apt-get -y install libtiff5-dev
+apt-get -y install libtiff5-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading zlib1g-dev #####${NC}\n"
-sudo apt-get -y install zlib1g-dev
+apt-get -y install zlib1g-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libicu-dev #####${NC}\n"
-sudo apt-get -y install libicu-dev
+apt-get -y install libicu-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libpango1.0-dev #####${NC}\n"
-sudo apt-get -y install libpango1.0-dev
+apt-get -y install libpango1.0-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading  libcairo2-dev #####${NC}\n"
-sudo apt-get -y install libcairo2-dev
+apt-get -y install libcairo2-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading firefox #####${NC}\n"
-sudo apt-get -y install firefox
+apt-get -y install firefox
 
 echo -e "\n${GREEN}  --->  installing/upgrading wmctrl #####${NC}\n"
-sudo apt-get -y install wmctrl
+apt-get -y install wmctrl
 
 echo -e "\n${GREEN}  --->  installing/upgrading xdotool #####${NC}\n"
-sudo apt-get -y install xdotool
+apt-get -y install xdotool
 
 echo -e "\n${GREEN}  --->  installing/upgrading python-tk #####${NC}\n"
-sudo apt-get -y install python-tk
+apt-get -y install python-tk
 
 
 echo -e "\n${GREEN}  --->  installing/upgrading pipenv #####${NC}\n"
@@ -125,9 +136,9 @@ else
     fi
 
     if [[ $(pwd | grep "leptonica-1.76.0") ]]; then
-        sudo ./configure &&\
-        sudo make &&\
-        sudo make install
+        ./configure &&\
+        make &&\
+        make install
     fi
 fi
 
@@ -157,12 +168,12 @@ else
     fi
 
     if [[ $(pwd | grep "tesseract-4.0.0") ]]; then
-        sudo ./autogen.sh &&\
+        ./autogen.sh &&\
         ./configure --enable-debug &&\
         LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make &&\
-        sudo make install &&\
-        sudo make install -langs &&\
-        sudo ldconfig
+        make install &&\
+        make install -langs &&\
+        ldconfig
     fi
 fi
 
