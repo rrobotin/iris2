@@ -9,7 +9,8 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
-      - useradd -p $(openssl passwd -1  ) ubuntu -s /bin/bash -aG sudo -m
+      - useradd ubuntu -s /bin/bash -G sudo -m
+      - passwd -d ubuntu
       - groups ubuntu
       - su - ubuntu
       - whoami
