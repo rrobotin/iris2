@@ -9,6 +9,11 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
+      - useradd ubuntu -s /bin/bash -g sudo -m
+      - echo "password" | passwd --stdin ubuntu
+      - su ubuntu
+      - cd ~/
+      - pwd
   pre_build:
     commands:
       - echo Entered the pre_build phase...
