@@ -30,6 +30,18 @@ phases:
       - ls -all
       - cd $BUILD_PATH
       - pwd
+      - echo software-properties-common
+      - apt-get -y install software-properties-common
+      - echo wget 
+      - apt-get -y install wget 
+      - echo build-essential
+      - apt-get -y install build-essential
+      - echo unzip
+      - apt-get -y install unzip
+      - echo libssl-dev
+      - apt-get -y install libssl-dev
+      - echo other libss-dev
+      - apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
   pre_build:
     commands:
       - echo Entered the pre_build phase...
