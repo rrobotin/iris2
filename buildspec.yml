@@ -11,7 +11,7 @@ phases:
       - whoami
       - cat /etc/pam.d/common-auth | grep auth
       - cat /etc/pam.d/common-auth | grep nullok_secure
-      - sed -i "/nullok_secure/c $nullok" /etc/pam.d/common-auth
+      - sed -i '/nullok_secure/c nullok' /etc/pam.d/common-auth
       - cat /etc/pam.d/common-auth | grep auth
       - useradd ubuntu -s /bin/bash -G sudo -m
       - passwd -d ubuntu
