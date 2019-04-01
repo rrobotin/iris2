@@ -20,7 +20,7 @@ apt-get -y install unzip
 echo -e "${GREEN}  --->  libssl-dev #####${NC} \n"
 apt-get -y install libssl-dev
 echo -e "${GREEN}  --->  other libss-dev #####${NC} \n"
-apt-get install make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
+apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
 echo which -a python
