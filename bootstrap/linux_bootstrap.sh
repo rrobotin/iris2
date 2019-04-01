@@ -19,6 +19,7 @@ echo -e "${GREEN}  --->  unzip #####${NC} \n"
 apt-get -y install unzip
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
+which -a python
 if command -v python3 &>/dev/null; then
     echo -e "\n${GREEN} --->  Python 3.5 install.${NC}\n"
     python --version
