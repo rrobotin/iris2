@@ -14,12 +14,16 @@ phases:
       - groups ubuntu
       - su - ubuntu
       - whoami
+      - pwd
+      - BUILD_PATH=$(pwd)
       - cd /home/
       - ls -all
       - cat /etc/passwd | grep ubuntu
       - cat /etc/shadow | grep ubuntu
       - cat /etc/group | grep ubuntu
       - cat /etc/gshadow | grep ubuntu
+      - cd $BUILD_PATH
+      - pwd
   pre_build:
     commands:
       - echo Entered the pre_build phase...
