@@ -21,6 +21,10 @@ if command -v python3 &>/dev/null; then
     ./configure
     make
     sudo make install
+    cd ../
+    python --version
+    sudo which python
+    sudo which python3
 else
     sudo apt-get -y install python3
 fi
