@@ -36,9 +36,9 @@ phases:
       - echo Build started on `date`
       - cd bootstrap/
       - ls -all
-      - sudo chmod +x bootstrap.sh
-      - sudo chmod +x linux_bootstrap.sh
-      - sudo ./bootstrap.sh
+      - su - ubuntu -c "chmod +x bootstrap.sh"
+      - su - ubuntu -c "chmod +x linux_bootstrap.sh"
+      - su - ubuntu -c "./bootstrap.sh"
       - echo FINISH INSTALL!!!!
   build:
     commands:
@@ -52,7 +52,7 @@ phases:
       - Xvfb :99 -screen 0 1920x1080x24+32 +extension GLX +extension RANDR > /dev/null 2>&1 &
       - sleep 3
       - echo Start CI tests
-      - sudo pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG
+      - su - ubuntu -c "pipenv run iris firefox ci_tests/test_fake_keyboard_input.py -vk -i DEBUG"
       - echo FINISH RUNNING TESTS
   post_build:
     commands:
