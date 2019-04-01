@@ -12,8 +12,6 @@ phases:
       - useradd ubuntu -s /bin/bash -g sudo -m
       - echo ubuntu:password | /usr/sbin/chpasswd
       - su ubuntu
-      - cd ~/
-      - pwd
   pre_build:
     commands:
       - echo Entered the pre_build phase...
