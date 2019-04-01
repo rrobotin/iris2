@@ -12,6 +12,7 @@ phases:
       - useradd ubuntu -s /bin/bash -G sudo -m
       - passwd -d ubuntu
       - groups ubuntu
+      - exit
       - su - ubuntu
       - whoami
       - pwd
