@@ -9,6 +9,7 @@ phases:
       - ls -all
       - cat /etc/os-release
       - whoami
+      - cat /etc/pam.d/common-auth | grep auth
       - useradd ubuntu -s /bin/bash -G sudo -m
       - passwd -d ubuntu
       - groups ubuntu
