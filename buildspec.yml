@@ -11,7 +11,10 @@ phases:
       - whoami
       - useradd ubuntu -s /bin/bash -g sudo -m
       - echo ubuntu:password | /usr/sbin/chpasswd
-      - su ubuntu
+      - su - ubuntu
+      - whoami
+      - cd /home/
+      - ls -all
   pre_build:
     commands:
       - echo Entered the pre_build phase...
