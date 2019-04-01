@@ -12,7 +12,7 @@ apt-get update
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5 #####${NC}\n"
 python3 --version
-if [[ $(ptyhon3 --version | grep "Python 3.5") ]]; then
+if [[ $(python3 --version | grep "Python 3.5") ]]; then
     python3 --version
     echo -e "\n${GREEN} --->  Skipping Python 3.5 install. Already installed. ${NC}\n"
 else
