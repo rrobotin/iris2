@@ -52,7 +52,7 @@ echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
 if command -v pip &>/dev/null; then
     python3.5 -m pip install --upgrade pip
 else
-    apt-get -y install python-pip
+    python3.5 -m pip install --upgrade pip
 fi
 
 # Installing library dependencies
