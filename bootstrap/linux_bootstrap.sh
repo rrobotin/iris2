@@ -7,9 +7,11 @@ NC='\033[0m' # No Color
 
 echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 
+echo -e "${GREEN}  --->  software-properties-common #####${NC} \n"
+apt-get install -y software-properties-common
 echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
-sudo apt-get install -y software-properties-common
 apt-get update
+echo -e "${GREEN}  --->  wget #####${NC} \n"
 apt-get install wget
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
