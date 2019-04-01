@@ -8,7 +8,9 @@ NC='\033[0m' # No Color
 echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 
 echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
+sudo apt-get install -y software-properties-common
 apt-get update
+apt-get install wget
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5/3.7 #####${NC}\n"
 if command -v python3 &>/dev/null; then
@@ -26,7 +28,6 @@ if command -v python3 &>/dev/null; then
     which python
     which python3
 else
-    python --version
     add-apt-repository ppa:deadsnakes/ppa
     wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
     tar xzvf Python-3.5.0.tgz
