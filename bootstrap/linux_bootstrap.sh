@@ -8,7 +8,10 @@ NC='\033[0m' # No Color
 echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
 
 echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
-apt-get update
+if [[ $(whoami | grep "root") ]]; then 
+    apt-get update
+else 
+    sudo apt-get update
 
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5 #####${NC}\n"
 python3 --version
