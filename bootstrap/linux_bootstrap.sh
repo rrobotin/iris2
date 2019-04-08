@@ -6,17 +6,21 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 echo -e "\n${RED}##### Starting Linux OS bootstrap #####${NC} \n"
+whoami
+[[ $(whoami | grep "root") ]] && echo "ROOT" || echo "WITH SUDO"
 
-if [[ $(whoami | grep "root") ]]; then 
-    echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
-    apt-get update
-else 
-    echo -e "${GREEN}  ---> sudo apt-get update #####${NC} \n"
-    sudo apt-get update
+
+if [[ $(whoami | grep "root") ]]; then
+    SUDO_USER=""
+else
+    SUDO_USER="sudo"
 fi
 
+echo -e "${GREEN}  --->  apt-get update #####${NC} \n"
+${SUDO_USER} apt-get update
+
 echo -e "\n${GREEN}  --->  installing/updating Python 3.5 #####${NC}\n"
-python3 --version
+
 if [[ $(python3 --version | grep "Python 3.5") ]]; then
     python3 --version
     echo -e "\n${GREEN} --->  Skipping Python 3.5 install. Already installed. ${NC}\n"
@@ -25,75 +29,77 @@ else
     wget https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
     tar xzvf Python-3.5.0.tgz
     cd Python-3.5.0
-    ./configure
-    make
-    make install
+    ${SUDO_USER} ./configure
+    ${SUDO_USER} make
+    ${SUDO_USER} make install
     cd ../
     python3 --version
 fi
 
 echo -e "\n${GREEN}  --->  installing/upgrading pip #####${NC}\n"
-if command -v pip &>/dev/null; then
+if command -v  python3.5 -m pip &>/dev/null; then
+    echo -e "\n${GREEN}  --->  Installing pip #####${NC}\n"
+    ${SUDO_USER} apt-get -y install python3-pip
     python3.5 -m pip install --upgrade pip
 else
-    apt-get -y install python-pip
+    echo -e "\n${GREEN}  --->  Upgrading pip #####${NC}\n"
     python3.5 -m pip install --upgrade pip
 fi
 
 # Installing library dependencies
 echo -e "\n${GREEN}  --->  installing/upgrading scrot #####${NC}\n"
-apt-get -y install scrot
+${SUDO_USER} apt-get -y install scrot
 
 echo -e "\n${GREEN}  --->  installing/upgrading xsel #####${NC}\n"
-apt-get -y install xsel
+${SUDO_USER} apt-get -y install xsel
 
 echo -e "\n${GREEN}  --->  installing/upgrading p7zip-full #####${NC}\n"
-apt-get -y install p7zip-full
+${SUDO_USER} apt-get -y install p7zip-full
 
 echo -e "\n${GREEN}  --->  installing/upgrading libopencv-dev #####${NC}\n"
-apt-get -y install libopencv-dev
+${SUDO_USER} apt-get -y install libopencv-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading autoconf automake libtool #####${NC}\n"
-apt-get -y install autoconf automake libtool
+${SUDO_USER} apt-get -y install autoconf automake libtool
 
 echo -e "\n${GREEN}  --->  installing/upgrading autoconf-archive #####${NC}\n"
-apt-get -y install autoconf-archive
+${SUDO_USER} apt-get -y install autoconf-archive
 
 echo -e "\n${GREEN}  --->  installing/upgrading pkg-config #####${NC}\n"
-apt-get -y install pkg-config
+${SUDO_USER} apt-get -y install pkg-config
 
 echo -e "\n${GREEN}  --->  installing/upgrading libpng-dev #####${NC}\n"
-apt-get -y install libpng-dev
+${SUDO_USER} apt-get -y install libpng-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libjpeg8-dev #####${NC}\n"
-apt-get -y install libjpeg8-dev
+${SUDO_USER} apt-get -y install libjpeg8-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libtiff5-dev #####${NC}\n"
-apt-get -y install libtiff5-dev
+${SUDO_USER} apt-get -y install libtiff5-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading zlib1g-dev #####${NC}\n"
-apt-get -y install zlib1g-dev
+${SUDO_USER} apt-get -y install zlib1g-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libicu-dev #####${NC}\n"
-apt-get -y install libicu-dev
+${SUDO_USER} apt-get -y install libicu-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading libpango1.0-dev #####${NC}\n"
-apt-get -y install libpango1.0-dev
+${SUDO_USER} apt-get -y install libpango1.0-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading  libcairo2-dev #####${NC}\n"
-apt-get -y install libcairo2-dev
+${SUDO_USER} apt-get -y install libcairo2-dev
 
 echo -e "\n${GREEN}  --->  installing/upgrading firefox #####${NC}\n"
-apt-get -y install firefox
+${SUDO_USER} apt-get -y install firefox
 
 echo -e "\n${GREEN}  --->  installing/upgrading wmctrl #####${NC}\n"
-apt-get -y install wmctrl
+${SUDO_USER} apt-get -y install wmctrl
 
 echo -e "\n${GREEN}  --->  installing/upgrading xdotool #####${NC}\n"
-apt-get -y install xdotool
+${SUDO_USER} apt-get -y install xdotool
 
-echo -e "\n${GREEN}  --->  installing/upgrading python-tk #####${NC}\n"
-apt-get -y install python-tk
+echo -e "\n${GREEN}  --->  installing/upgrading python3-tk #####${NC}\n"
+${SUDO_USER} apt-get -y install python3-tk
 
 
 echo -e "\n${GREEN}  --->  installing/upgrading pipenv #####${NC}\n"
@@ -109,29 +115,29 @@ if [[ $(tesseract -v | grep "leptonica-1.76") ]]; then
     echo -e "\n${GREEN} --->  Skipping Leptonica install. Already installed. ${NC}\n"
 else
     cd ~
-    if [ ! -f leptonica-1.76.0.tar.gz ]; then
+    if [[ ! -f leptonica-1.76.0.tar.gz ]]; then
         echo "\n${GREEN}  --->  Downloading leptonica-1.76.0.tar.gz ${NC}\n"
         wget http://www.leptonica.com/source/leptonica-1.76.0.tar.gz
     fi
 
-    if [ ! -d leptonica-1.76.0 ]; then
-        if [ -f leptonica-1.76.0.tar.gz ]; then
+    if [[ ! -d leptonica-1.76.0 ]]; then
+        if [[ -f leptonica-1.76.0.tar.gz ]]; then
             tar xopf leptonica-1.76.0.tar.gz
         else
             echo -e "\n${RED}  --->  Archive leptonica-1.76.0.tar.gz not found! Maybe download failed. ${NC}\n" && exit 0
         fi
     fi
 
-    if [ ! -d leptonica-1.76.0 ]; then
+    if [[ ! -d leptonica-1.76.0 ]]; then
         echo "\n${RED}  --->  leptonica-1.76.0 directory not found! Maybe the extraction failed. ${NC}\n" && exit 0
     else
         cd leptonica-1.76.0
     fi
 
     if [[ $(pwd | grep "leptonica-1.76.0") ]]; then
-        ./configure &&\
-        make &&\
-        make install
+        ${SUDO_USER} ./configure &&\
+        ${SUDO_USER} make &&\
+        ${SUDO_USER} make install
     fi
 fi
 
@@ -141,45 +147,45 @@ if [[ $(tesseract -v | grep "tesseract 4.") ]]; then
     echo -e "\n${GREEN} --->  Skipping Tesseract v4 install. Already installed. ${NC}\n"
 else
     cd ~
-    if [ ! -f 4.0.0.tar.gz ]; then
+    if [[ ! -f 4.0.0.tar.gz ]]; then
         echo "\n${GREEN}  --->  Downloading Tesseract archive 4.0.0.tar.gz ${NC}\n"
         wget https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz
     fi
 
-    if [ ! -d tesseract-4.0.0 ]; then
-        if [ -f 4.0.0.tar.gz ]; then
+    if [[ ! -d tesseract-4.0.0 ]]; then
+        if [[ -f 4.0.0.tar.gz ]]; then
             tar xopf 4.0.0.tar.gz
         else
             echo -e "\n${RED}  --->  Tesseract archive 4.0.0.tar.gz not found! Maybe download failed. ${NC}\n" && exit 0
         fi
     fi
 
-    if [ ! -d tesseract-4.0.0 ]; then
+    if [[ ! -d tesseract-4.0.0 ]]; then
         echo "\n${RED}  --->  tesseract-4.0.0 directory not found! Maybe the extraction failed. ${NC}\n" && exit 0
     else
         cd tesseract-4.0.0
     fi
 
     if [[ $(pwd | grep "tesseract-4.0.0") ]]; then
-        ./autogen.sh &&\
+        ${SUDO_USER} ./autogen.sh &&\
         ./configure --enable-debug &&\
         LDFLAGS="-L/usr/local/lib" CFLAGS="-I/usr/local/include" make &&\
-        make install &&\
-        make install -langs &&\
-        ldconfig
+        ${SUDO_USER} make install &&\
+        ${SUDO_USER} make install -langs &&\
+        ${SUDO_USER} ldconfig
     fi
 fi
 
 
 echo -e "\n${GREEN}  --->  Downloading and installing Tesseract data #####${NC}\n"
-if  [ ! -f /usr/local/share/tessdata/afr.traineddata ]; then
+if  [[ ! -f /usr/local/share/tessdata/afr.traineddata ]]; then
     cd ~
-    if [ ! -f 4.0.0.zip ]; then
+    if [[ ! -f 4.0.0.zip ]]; then
         echo "\n${GREEN}   --->  Downloading Tessdata archive 4.0.0.zip ${NC}\n"
         wget https://github.com/tesseract-ocr/tessdata/archive/4.0.0.zip
     fi
 
-    if [ -f 4.0.0.zip ]; then
+    if [[ -f 4.0.0.zip ]]; then
         if [[ $(find 4.0.0.zip -type f -size +490000000c 2>/dev/null) ]]; then
             echo -e "\n${GREEN}  --->  Download finished. Unziping Tessdata archive 4.0.0.zip ${NC}\n"
             unzip 4.0.0.zip
@@ -191,17 +197,17 @@ if  [ ! -f /usr/local/share/tessdata/afr.traineddata ]; then
         echo -e "\n${RED}  --->  Tessdata archive 4.0.0.zip not found! Maybe download failed. ${NC}\n" && exit 0
     fi
 
-    if [ ! -d tessdata-4.0.0 ]; then
+    if [[ ! -d tessdata-4.0.0 ]]; then
         echo "\n${RED}  --->  tessdata-4.0.0 directory not found! Maybe the extraction failed. ${NC}\n" && exit 0
     else
         cd tessdata-4.0.0
     fi
 
     if [[ $(pwd | grep "tessdata-4.0.0") ]]; then
-        if [ ! -d /usr/local/share/tessdata/ ]; then
-            mkdir /usr/local/share/tessdata/
+        if [[ ! -d /usr/local/share/tessdata/ ]]; then
+            ${SUDO_USER} mkdir /usr/local/share/tessdata/
         fi
-        mv * /usr/local/share/tessdata/
+        ${SUDO_USER} mv * /usr/local/share/tessdata/
     fi
 
 else
